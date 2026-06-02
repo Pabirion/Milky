@@ -337,7 +337,7 @@ const ui = {
     color: 'rgba(232,236,255,0.85)', padding: '10px 20px', borderRadius: 999, cursor: 'pointer',
     fontSize: 13.5, fontFamily: 'inherit', backdropFilter: 'blur(8px)', whiteSpace: 'nowrap' },
 
-  afterglow: { position: 'absolute', left: '50%', top: '50%', transform: 'translate(-50%,-50%)',
+  afterglow: { position: 'absolute', left: '50%', top: '20%', transform: 'translate(-50%,-20%)',
     fontFamily: "'Spectral', Georgia, serif", fontWeight: 300, fontSize: 'clamp(22px, 3.4vw, 30px)',
     color: '#eef1ff', textAlign: 'center', maxWidth: 'min(560px, 86vw)', lineHeight: 1.45,
     textShadow: '0 0 40px rgba(150,180,255,0.4)', pointerEvents: 'none' },
