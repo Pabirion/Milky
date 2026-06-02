@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<title>Spilt Milky Way</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,200;0,300;0,400;1,300&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html, body { width: 100%; height: 100%; background: #04040b; overflow: hidden; }
+  #root { width: 100%; height: 100%; }
+
+  ::selection { background: rgba(150,180,255,0.25); }
+
+  .fade-in { animation: fadeIn 1.1s ease both; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .fade-out { animation: fadeOut 0.5s ease both; }
+  @keyframes fadeOut { to { opacity: 0; } }
+
+  /* breathing orb: gentle idle pulse */
+  .orb { animation: orbBreath 7s ease-in-out infinite; }
+  @keyframes orbBreath {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.06); }
+  }
+  /* while held (inhale) the orb swells slowly and brightens */
+  .orb-inhale { animation: none; transform: scale(1.34) !important; filter: brightness(1.25); transition: transform 4.2s cubic-bezier(.3,.5,.3,1), filter 4.2s ease !important; }
+  /* dissolve: bloom then vanish */
+  .orb-dissolve { animation: none; transform: scale(1.5) !important; opacity: 0; filter: blur(7px) brightness(1.4); transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease !important; }
+  /* released: hand off to the canvas star */
+  .orb-gone { animation: none; opacity: 0; transform: scale(0.4) !important; transition: opacity 0.6s ease, transform 0.6s ease !important; }
+  .orb-words-fade { opacity: 0 !important; }
+
+  /* breathing guide ring behind the orb */
+  .breathe-ring { animation: ringBreath 7s ease-in-out infinite; }
+  @keyframes ringBreath {
+    0%, 100% { transform: scale(0.82); opacity: 0.25; }
+    50% { transform: scale(1.12); opacity: 0.6; }
+  }
+
+  .afterglow-anim { animation: afterglow 3.4s ease both; }
+  @keyframes afterglow {
+    0% { opacity: 0; transform: translate(-50%, -46%); }
+    18% { opacity: 1; transform: translate(-50%, -50%); }
+    78% { opacity: 1; transform: translate(-50%, -50%); }
+    100% { opacity: 0; transform: translate(-50%, -54%); }
+  }
+
+  .press { transition: transform 0.2s ease, opacity 0.25s ease, background 0.25s ease; }
+  .press:hover { opacity: 0.92; }
+  .press:active { transform: scale(0.97); }
+  button.press:hover { background: rgba(255,255,255,0.08); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .orb { animation: none; }
+    .breathe-ring { animation: none; opacity: 0.4; }
+  }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="theme-engine.jsx"></script>
+<script type="text/babel" src="starfield.jsx"></script>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+<script type="text/babel" src="app.jsx"></script>
+</body>
+</html>
