@@ -158,10 +158,18 @@ function App() {
       {/* ---------------- SKY ---------------- */}
       {view === 'sky' && (
         <div style={{ ...ui.center, opacity: afterglow ? 0 : 1, transition: 'opacity 1.1s ease' }} className="fade-in">
-          <div style={ui.kicker}>SPILT MILKY WAY</div>
-          <button style={ui.primaryPrompt} className="press"
-            onClick={startCompose}>Vad tynger dig?</button>
-          <div style={ui.subtle}>Skriv ner det. Släpp taget. Låt det bli ljus.</div>
+          <div style={ui.kicker}>MILKY WAY</div>
+          <div style={ui.skyPromptLabel}>Vad tynger dig?</div>
+          <textarea
+            autoFocus value={text}
+            onChange={(e) => setText(e.target.value)}
+            placeholder="Låt orden komma. Ingen läser dem."
+            style={ui.textarea} rows={3} maxLength={400} />
+          <div style={ui.composeBtns}>
+            <button style={{ ...ui.solidBtn, opacity: text.trim().length >= 2 ? 1 : 0.35,
+              pointerEvents: text.trim().length >= 2 ? 'auto' : 'none' }}
+              className="press" onClick={beginRelease}>Forma till ljus</button>
+          </div>
           {count > 0 && (
             <div style={ui.skyFoot}>
               <span style={ui.footCount}>{count} {count === 1 ? 'ljus' : 'ljus'} i din himmel · de bleknar långsamt</span>
@@ -287,6 +295,9 @@ const ui = {
   primaryPrompt: { background: 'none', border: 'none', color: '#f3f5ff', cursor: 'pointer',
     fontFamily: "'Spectral', Georgia, serif", fontWeight: 300, fontSize: 'clamp(34px, 6vw, 60px)',
     letterSpacing: '0.01em', textShadow: '0 0 40px rgba(150,180,255,0.35)', lineHeight: 1.05 },
+  skyPromptLabel: { fontFamily: "'Spectral', Georgia, serif", fontWeight: 300,
+    fontSize: 'clamp(28px, 4.5vw, 48px)', color: '#f3f5ff', letterSpacing: '0.01em',
+    textShadow: '0 0 40px rgba(150,180,255,0.35)', lineHeight: 1.05 },
   subtle: { fontSize: 15, color: 'rgba(205,214,255,0.55)', fontWeight: 300, maxWidth: 360, lineHeight: 1.5 },
   skyFoot: { position: 'absolute', bottom: 36, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 12 },
   footCount: { fontSize: 12.5, color: 'rgba(205,214,255,0.42)', letterSpacing: '0.02em' },
